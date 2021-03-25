@@ -1,0 +1,12 @@
+body {
+	font-family: sans-serif;
+}
+h2 {
+	color: blue;
+}
+canvas {
+    border: 1px solid gray;
+}
+button {
+	display: block;
+}
