@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+    mnist-microservice:
+        build:
+            context: ./mnist-microservice
+        image: mnist-microservice
+        restart: unless-stopped
+        expose:
+            - "5000"
+        deploy:
+            replicas: 3
+
+
+    nginx-balancer:
+        image: nginx
+        container_name: nginx-balancer
+        restart: unless-stopped
+        volumes:
+            - ./nginx-balancer/nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+            - mnist-microservice
+        ports:
+            - "5000:4000"
