@@ -22,3 +22,17 @@ services:
             - mnist-microservice
         ports:
             - "5000:4000"
+
+
+    nginx-html:
+        image: nginx
+        container_name: nginx-html
+        restart: unless-stopped
+        volumes:
+            - ./html:/usr/share/nginx/html:ro
+        depends_on:
+            - nginx-balancer
+        ports:
+            - "8080:80"
+
+
