@@ -6,7 +6,9 @@ from flask_cors import CORS
 import image
 
 app = Flask(__name__)
-CORS(app)
+
+# Cross Origin Resource Sharing (CORS) handling
+CORS(app, resources={'/image': {"origins": "http://localhost:8080"}})
 
 @app.route('/image', methods=['POST'])
 def image_post_request():  
