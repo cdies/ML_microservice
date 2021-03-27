@@ -7,13 +7,13 @@ import image
 
 app = Flask(__name__)
 
+model = keras.models.load_model('model.h5')
+
 # Cross Origin Resource Sharing (CORS) handling
 CORS(app, resources={'/image': {"origins": "http://localhost:8080"}})
 
 @app.route('/image', methods=['POST'])
 def image_post_request():  
-    model = keras.models.load_model('model.h5')
-
     x = image.convert(request.json['image'])
     y = model.predict(x.reshape((1,28,28,1))).reshape((10,))
     n = int(np.argmax(y, axis=0))
